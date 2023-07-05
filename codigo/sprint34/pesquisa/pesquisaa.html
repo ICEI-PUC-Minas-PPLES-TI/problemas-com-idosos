@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Contatos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <header> 
+        <a href="../Idosos/inter.html" class="botaobk"> Voltar </a></header>
+  <div class="Pesquisa ms-5">
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" id="inputContact">
+                <button class="border-0 rounded-pill bg-white text-danger-emphasis" type="submit"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                  </svg></button>
+              </form>
+            </div>
+</nav>
+	<div class="container">
+		<div class="contact-box">
+			<div class="contact-photo">
+				<img src="../perfil/essee.png" alt="Foto de perfil">
+			</div>
+			<div class="contact-info">
+				<div class="contact-name">Andrea Assis</div>
+				<div class="contact-city">Belo Horizonte, MG <a href="../chat/All.html" class="chat-icon"><i class="fas fa-comment"></i></a><a href="excluir.html" class="delete-button"><i class="fas fa-user"></i><span>&times;</span></a> </div>
+			</div>
+		</div>
+		<div class="contact-box">
+			<div class="contact-photo">
+				<img src="../perfil/essee.png" alt="Foto de perfil">
+			</div>
+			<div class="contact-info">
+				<div class="contact-name">Pedro Romanhol</div>
+				<div class="contact-city">João Molevade, MG <a href="../chat/All.html" class="chat-icon"><i class="fas fa-comment"></i></a><a href="excluir.html" class="delete-button"><i class="fas fa-user"></i><span>&times;</span></a>
+        </a> </div>
+			</div>
+		</div>
+		<div class="contact-box">
+			<div class="contact-photo">
+				<img src="../perfil/essee.png" alt="Foto de perfil">
+			</div>
+			<div class="contact-info">
+				<div class="contact-name">Maria Madalena</div>
+				<div class="contact-city">Betim, MG <a href="../chat/All.html" class="chat-icon"><i class="fas fa-comment"></i></a><a href="excluir.html" class="delete-button"><i class="fas fa-user"></i><span>&times;</span></a>
+        </a> </div>
+			</div>
+		</div>
+    <div class="contact-box">
+			<div class="contact-photo">
+				<img src="../perfil/essee.png" alt="Foto de perfil">
+			</div>
+			<div class="contact-info">
+				<div class="contact-name">Maria Peres</div>
+				<div class="contact-city">Betim, MG <a href="../chat/All.html" class="chat-icon"><i class="fas fa-comment"></i></a><a href="excluir.html" class="delete-button"><i class="fas fa-user"></i><span>&times;</span></a>
+        </a> </div>
+			</div>
+		</div>
+    <div class="contact-box">
+			<div class="contact-photo">
+				<img src="../perfil/essee.png" alt="Foto de perfil">
+			</div>
+			<div class="contact-info">
+				<div class="contact-name">Rita Cassia</div>
+				<div class="contact-city">Goiânia, GO <a href="../chat/All.html" class="chat-icon"><i class="fas fa-comment"></i></a><a href="excluir.html" class="delete-button"><i class="fas fa-user"></i><span>&times;</span></a>
+        </a> </div>
+			</div>
+		</div>
+    <div class="contact-box">
+			<div class="contact-photo">
+				<img src="../perfil/essee.png" alt="Foto de perfil">
+			</div>
+			<div class="contact-info">
+				<div class="contact-name">Luciana Silva</div>
+				<div class="contact-city">Belo Horizonte, MG <a href="../chat/All.html" class="chat-icon"><i class="fas fa-comment"></i></a><a href="excluir.html" class="delete-button"><i class="fas fa-user"></i><span>&times;</span></a>
+        </a> </div>
+			</div>
+		</div>
+    <div class="contact-box">
+			<div class="contact-photo">
+				<img src="../perfil/essee.png" alt="Foto de perfil">
+			</div>
+			<div class="contact-info">
+				<div class="contact-name">Joana Soares</div>
+				<div class="contact-city">Caeté, MG <a href="../chat/All.html" class="chat-icon"><i class="fas fa-comment"></i></a><a href="excluir.html" class="delete-button"><i class="fas fa-user"></i><span>&times;</span></a>
+        </a> </div>
+			</div>
+		</div>
+  </div>
+  <script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const inputContact = document.getElementById('inputContact');
+			const contactBoxes = document.getElementsByClassName('contact-box');
+
+			inputContact.addEventListener('input', function() {
+				const searchQuery = inputContact.value.toLowerCase();
+
+				for (let i = 0; i < contactBoxes.length; i++) {
+					const contactName = contactBoxes[i].querySelector('.contact-name').textContent.toLowerCase();
+
+					if (contactName.includes(searchQuery)) {
+						contactBoxes[i].style.display = 'block';
+					} else {
+						contactBoxes[i].style.display = 'none';
+					}
+				}
+			});
+		});
+	</script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+</body>
+  <footer class = "footer">
+<div class ="container">

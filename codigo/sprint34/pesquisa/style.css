@@ -1,0 +1,86 @@
+/* Estilo para o container dos contatos */
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+
+/* Estilo para a caixa de cada contato */
+.contact-box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #f2f2f2;
+	padding: 10px;
+	width: 90%;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Estilo para a foto de perfil do contato */
+.contact-photo {
+	border-radius: 50%;
+	overflow: hidden;
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+}
+
+.contact-photo img {
+	width: 100%;
+	height: auto;
+	border-radius: 50%;
+}
+
+/* Estilo para as informações do contato */
+.contact-info {
+	flex-grow: 1;
+}
+
+/* Estilo para o nome do contato */
+.contact-name {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+/* Estilo para a cidade do contato */
+.contact-city {
+	font-size: 16px;
+	color: #666;
+	margin-bottom: 30px;
+}
+/* Estilo para o estado do contato */
+.contact-state {
+	font-size: 16px;
+	color: #666;
+}
+.footer a {
+    color: #007fff;
+    font-size: 30px;
+  position: relative;
+}
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 0 10px;
+}
+
+
+
+
+
+
+

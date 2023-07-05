@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="redefinir.css" />
+    <title>Recuperar Senha</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Recuperar Senha</h1>
+        <div class="label-float">
+          <input type="text" id="email" required />
+          <label>Email</label>
+        </div>
+        <button id="recuperarSenha">Redefinir</button>
+        <div id="msgError"></div>
+        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+      </div>
+    </div>
+
+    <div class="container" id="containerRedefinirSenha" style="display: none;">
+      <div class="card">
+        <h1>Redefinir Senha</h1>
+        <div class="label-float">
+          <input type="password" id="senha" required />
+          <label>Nova Senha</label>
+        </div>
+        <button id="redefinirSenha">Salvar</button>
+        <div id="msgError"></div>
+        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+      </div>
+    </div>
+
+    <script src="redefinir.js"></script>
+  </body>
+</html>
+
+
+
+

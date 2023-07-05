@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil do usuário</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <style>
+      .navbar {
+        margin-bottom: 0;
+      }
+
+      .content {
+        height: calc(100vh - 56px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 20px; 
+      }
+
+      #w3review {
+        background-color: #cfe2f3;
+        color: #000;
+        font-size: 16px;
+        margin-top: 30px;
+      }
+
+      #w3review::placeholder {
+        color: gray;
+      }
+
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px; 
+      }
+
+      .checkbox-group .checkbox-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      .checkbox-group .checkbox-item label {
+        margin-right: 67px;
+      }
+
+      .checkbox-group .checkbox-item.large-margin label {
+        margin-right: 10px;
+      }
+
+      #name {
+        margin-top: 30px; 
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">
+          <button class="btn" type="submit" onclick="voltar()">
+            Voltar
+          </button></a
+        >
+        <button class="btn" type="submit">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-gear"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"
+            />
+            <path
+              d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"
+            />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="content">
+      <div>
+        <input type="file" id="inputFile" accept="image/*" />
+      </div>
+
+      <div>
+        <img
+          id="previewImage"
+          class="rounded-circle img-fluid"
+          width="200"
+          height="200"
+          src="essee.png"
+        />
+      </div>
+
+      <style>
+        #previewImage {
+          border-radius: 50%;
+          object-fit: cover;
+          width: 200px;
+          height: 200px;
+        }
+      </style>
+
+  <script> window.addEventListener('DOMContentLoaded', function() {
+    const previewImage = document.getElementById('previewImage');
+    const inputFile = document.getElementById('inputFile');
+    const inputFileLabel = document.getElementById('inputFileLabel');
+  
+    inputFile.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+  
+      if (file) {
+        const reader = new FileReader();
+  
+        reader.onload = function() {
+          previewImage.src = reader.result;
+          // Salvar a imagem no Local Storage
+          localStorage.setItem('previewImage', reader.result);
+        };
+  
+        reader.readAsDataURL(file);
+      }
+    });
+  
+    inputFileLabel.addEventListener('click', function() {
+      inputFile.click();
+    });
+  
+    const savedImage = localStorage.getItem('previewImage');
+    if (savedImage) {
+      previewImage.src = savedImage;
+    }
+  });
+  </script>
+
+      <form>
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" oninput="salvarNome()" />
+      </form>
+
+      <textarea
+        id="w3review"
+        name="w3review"
+        rows="4"
+        col="50"
+        placeholder="Fale sobre você!"
+      ></textarea>
+
+      <fieldset class="checkbox-group">
+        <div class="checkbox-item">
+          <label for="scales">Perfil privado</label>
+          <input type="checkbox" id="scales" name="scales" checked />
+        </div>
+
+        <div class="checkbox-item">
+          <label for="horns">Notificações</label>
+          <input type="checkbox" id="horns" name="horns" />
+        </div>
+
+        <div class="checkbox-item large-margin">
+          <label for="messages">Receber mensagens</label>
+          <input type="checkbox" id="messages" name="messages" />
+        </div>
+      </fieldset>
+
+      <style>
+        .save-button {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+      </style>
+
+      <button class="save-button" onclick="salvarBiografia()">
+        Salvar alterações
+      </button>
+<footer>
+      <div class="button-container">
+          <p>
+          <nav>
+              <ul>
+                <li><a href="../Idosos/inter.html"><i class="fas fa-home"></i></a></li>
+                <li><a href="../contatos/conta.html"><i class="fas fa-comments"></i></a></li>
+                <li><a href="../pesquisa/pesquisaa.html"><i class="fas fa-search"></i></a></li>
+                <li><a href="../perfil/perfill.html"><i class="fas fa-user"></i></a></li>
+              </ul>
+          </nav>
+          </p>
+<style>
+ 
+  footer {
+    height: 8vh;
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    width: 40px; /* Increase the width to adjust the size of the icons */
+    margin: 0 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #007fff;
+    font-size: 24px; /* Increase the font size to adjust the icon size */
+}
+
+</style>
+    </div>
+  </footer>
+    <script src="caminho/para/script.js"></script>
+  </body>
+</html>

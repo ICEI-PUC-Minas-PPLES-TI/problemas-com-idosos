@@ -1,0 +1,52 @@
+{
+    "novosDados": [
+      {
+        "id": 1,
+        "nome": "Viagens",
+        "imagem": "../imagens/Interesses/viagem.png",
+        "link": "https://www.google.com/search?q=viagens"
+      },
+      {
+        "id": 2,
+        "nome": "Esportes",
+        "imagem": "imagens/Interesses/esporte.png",
+        "link": "https://www.google.com/search?q=esportes"
+      },
+      {
+        "id": 3,
+        "nome": "Música",
+        "imagem": "imagens/Interesses/musica.png",
+        "link": "https://www.google.com/search?q=musica"
+      },
+      {
+        "id": 4,
+        "nome": "Cinema",
+        "imagem": "imagens/Interesses/cinema.png",
+        "link": "https://www.google.com/search?q=cinema"
+      },
+      {
+        "id": 5,
+        "nome": "Jogos",
+        "imagem": "imagens/Interesses/jogos.png",
+        "link": "https://www.google.com/search?q=jogos"
+      },
+      {
+        "id": 6,
+        "nome": "Beleza",
+        "imagem": "imagens/Interesses/beleza.png",
+        "link": "../chat/beleza.html"
+      },
+      {
+        "id": 7,
+        "nome": "Yoga",
+        "imagem": "imagens/Interesses/yoga.png",
+        "link": "https://www.google.com/search?q=yoga"
+      },
+      {
+        "id": 8,
+        "nome": "Pets",
+        "imagem": "imagens/Interesses/pets.png",
+        "link": "https://www.google.com/search?q=pets"
+      }
+    ]
+  }

@@ -1,0 +1,80 @@
+{
+    "button": {
+        "class": "btn",
+        "type": "submit",
+        "onclick": "voltar()",
+        "text": "Voltar",
+        "voltar": "function voltar() {\n  window.location.href = \"listadecontatos.html\";\n}"
+    },
+    "DOMContentLoaded": "window.addEventListener('DOMContentLoaded', function() {\n  const previewImage = document.getElementById('previewImage');\n  const inputFile = document.getElementById('inputFile');\n  const inputFileLabel = document.getElementById('inputFileLabel');\n\n  inputFile.addEventListener('change', function(event) {\n    const file = event.target.files[0];\n\n    if (file) {\n      const reader = new FileReader();\n\n      reader.onload = function() {\n        previewImage.src = reader.result;\n      };\n\n      reader.readAsDataURL(file);\n    }\n  });\n\n  inputFileLabel.addEventListener('click', function() {\n    inputFile.click();\n  });\n});",
+    "div1": {
+        "children": [
+            {
+                "input": {
+                    "type": "file",
+                    "id": "inputFile",
+                    "accept": "image/*"
+                }
+            }
+        ]
+    },
+    "div2": {
+        "children": [
+            {
+                "img": {
+                    "id": "previewImage",
+                    "class": "rounded-circle img-fluid",
+                    "width": "200",
+                    "height": "200",
+                    "src": "essee.png"
+                }
+            }
+        ]
+    },
+    "form": {
+        "children": [
+            {
+                "label": {
+                    "for": "name",
+                    "text": "Nome:"
+                }
+            },
+            {
+                "input": {
+                    "type": "text",
+                    "id": "name",
+                    "name": "name",
+                    "oninput": "salvarNome()"
+                }
+            }
+        ]
+    },
+    "salvarNome": "function salvarNome() {\n  var nomeInput = document.getElementById(\"name\");\n  var nome = nomeInput.value;\n  localStorage.setItem(\"nomeUsuario\", nome);\n}",
+    "textarea": {
+        "id": "w3review",
+        "name": "w3review",
+        "rows": 4,
+        "cols": 50,
+        "placeholder": "Fale sobre você!"
+    },
+    "salvarBiografia": "function salvarBiografia() {\n  var biografia = document.getElementById(\"w3review\").value;\n  var dados = { biografia: biografia };\n  var dadosJson = JSON.stringify(dados);\n  localStorage.setItem(\"biografiaUsuario\", dadosJson);\n  alert(\"Alterações salvas com sucesso!\");\n}",
+    "recuperarBiografia": "function recuperarBiografia() {\n  var dadosJson = localStorage.getItem(\"biografiaUsuario\");\n  if (dadosJson) {\n    var dados = JSON.parse(dadosJson);\n    document.getElementById(\"w3review\").value = dados.biografia;\n  }\n}",
+    "buttons": [
+        {
+            "class": "btn-primary",
+            "type": "button",
+            "onclick": "redirectToPage('button1')"
+        },
+        {
+            "class": "btn-secondary",
+            "type": "button",
+            "onclick": "redirectToPage('button2')"
+        },
+        {
+            "class": "btn-success",
+            "type": "submit",
+            "onclick": "submitForm"
+        }
+       
+    ]
+}

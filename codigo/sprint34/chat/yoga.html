@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Yoga</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+
+        }
+
+        #chat-header {
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        #chat-title {
+            margin: 0;
+        }
+
+        #chat-container {
+            margin-top: 60px;
+            height: calc(78vh - 100px);
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 100px;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            position: relative;
+            padding: 20px;
+            font-size: 22px;
+            border-radius: 20px;
+            word-break: break-word;
+            min-width: 8ch;
+            max-width: 65%;
+        }
+
+        .sender {
+            background-color: #0D99FF;
+            color: #fff;
+            align-self: flex-end;
+        }
+
+        .receiver {
+            background-color: #BDE3FF;
+        }
+
+        .timestamp {
+            font-size: 14px;
+            color: #999;
+            position: absolute;
+            bottom: -18px;
+            right: 10px;
+        }
+
+        #message-input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+            min-height: 60px;
+        }
+
+        #message-input {
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+            min-height: 50px;
+        }
+
+        #audio-button.recording {
+            background-color: red;
+        }
+
+        #send-button,
+        #file-button,
+        #audio-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: #0D99FF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        #file-button {
+            background-color: #0D99FF;
+        }
+
+        #audio-button {
+            background-color: #0D99FF;
+        }
+
+        @media (max-width: 480px) {
+            #chat-container {
+                height: calc(100vh - 300px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chat-header">
+        <h1 id="chat-title">Yoga</h1>
+    </div>
+    <div id="chat-container"></div>
+    <div id="message-input-container">
+        <input type="text" id="message-input" placeholder="Digite sua mensagem">
+        <button id="file-button">
+            <input type="file" id="file-input" style="display: none;">
+            <i class="fas fa-paperclip"></i>
+        </button>
+        <button id="audio-button">
+            <input id="audio-input" accept="audio/*" style="display: none;">
+            <i class="fas fa-microphone"></i>
+        </button>
+        <button id="send-button">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBmyfx6bIaacdcexdka5Q5lZHK4ej5bnMc",
+            authDomain: "appidosos.firebaseapp.com",
+            projectId: "appidosos",
+            storageBucket: "appidosos.appspot.com",
+            messagingSenderId: "768962498032",
+            appId: "1:768962498032:web:1858a4dc52cc8fc2dde135"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.firestore();
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const fileInput = document.getElementById('file-input');
+        const audioInput = document.getElementById('audio-input');
+        const fileButton = document.getElementById('file-button');
+        const audioButton = document.getElementById('audio-button');
+        let messageListener;
+        let nickname = '';
+
+        function loadChatMessages() {
+            if (messageListener) {
+                messageListener();
+            }
+
+            messageListener = db.collection('chatYoga')
+                .orderBy('timestamp')
+                .onSnapshot((snapshot) => {
+                    chatContainer.innerHTML = '';
+
+                    snapshot.forEach((change) => {
+                        const message = change.data();
+                        const messageContainer = document.createElement('div');
+                        messageContainer.classList.add('message-container');
+
+                        const messageElement = document.createElement('div');
+                        messageElement.classList.add('message');
+                        messageElement.classList.add(message.sender === nickname ? 'sender' : 'receiver');
+                        messageElement.textContent = message.text;
+
+                        const timestampElement = document.createElement('div');
+                        timestampElement.classList.add('timestamp');
+                        timestampElement.textContent = formatTimestamp(message.timestamp);
+
+                        messageElement.appendChild(timestampElement);
+
+                        if (message.imageData) {
+                            const imageElement = createImageElement(message.imageData);
+                            messageElement.appendChild(imageElement);
+                        } else if (message.audioData) {
+                            const audioElement = createAudioElement(message.audioData);
+                            messageElement.appendChild(audioElement);
+                        }
+
+                        messageContainer.appendChild(messageElement);
+                        chatContainer.appendChild(messageContainer);
+                    });
+
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                });
+        }
+
+        function formatTimestamp(timestamp) {
+            const date = timestamp.toDate();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        function setNickname() {
+            const nicknameInput = prompt("Digite seu nickname:");
+            if (nicknameInput && nicknameInput.trim() !== '') {
+                nickname = nicknameInput.trim();
+                loadChatMessages();
+            } else {
+                setNickname();
+            }
+        }
+
+        setNickname();
+
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (text !== '') {
+                db.collection('chatYoga').add({
+                    text: text,
+                    sender: nickname,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                messageInput.value = '';
+            }
+        }
+
+        function createImageElement(imageData) {
+            const imageElement = document.createElement('img');
+            imageElement.src = imageData;
+            imageElement.style.maxWidth = '100%';
+            imageElement.style.borderRadius = '10px';
+            imageElement.style.marginTop = '10px';
+            return imageElement;
+        }
+
+        function createAudioElement(audioData) {
+            const audioElement = document.createElement('audio');
+            audioElement.src = audioData;
+            audioElement.controls = true;
+            audioElement.style.marginTop = '10px';
+            return audioElement;
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        fileButton.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const imageData = event.target.result;
+                    db.collection('chatYoga').add({
+                        imageData: imageData,
+                        sender: nickname,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        audioButton.addEventListener('click', () => {
+            audioInput.click();
+        });
+
+        audioInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const audioData = event.target.result;
+                    db.collection('chatYoga').add({
+                        audioData: audioData,
+                        sender: nickname,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Novo código para gravação e envio de áudio
+        let mediaRecorder;
+        let recording = false;
+
+        function startRecording() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then((stream) => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    const chunks = [];
+
+                    mediaRecorder.ondataavailable = (e) => {
+                        chunks.push(e.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            const audioData = event.target.result;
+                            db.collection('chatYoga').add({
+                                audioData: audioData,
+                                sender: nickname,
+                                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                            });
+                        };
+                        reader.readAsDataURL(audioBlob);
+                    };
+
+                    mediaRecorder.start();
+                    recording = true;
+                    audioButton.classList.add('recording');
+                })
+                .catch((error) => {
+                    console.error('Error accessing microphone:', error);
+                });
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && recording) {
+                mediaRecorder.stop();
+                recording = false;
+                audioButton.classList.remove('recording');
+            }
+        }
+
+        audioButton.addEventListener('mousedown', startRecording);
+        audioButton.addEventListener('touchstart', startRecording);
+        audioButton.addEventListener('mouseup', stopRecording);
+        audioButton.addEventListener('touchend', stopRecording);
+    </script>
+</body>
+
+</html>
